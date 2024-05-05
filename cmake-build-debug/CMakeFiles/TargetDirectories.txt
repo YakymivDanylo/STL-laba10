@@ -1,0 +1,3 @@
+C:/clion/STL-laba10/cmake-build-debug/CMakeFiles/STL_laba10.dir
+C:/clion/STL-laba10/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/clion/STL-laba10/cmake-build-debug/CMakeFiles/rebuild_cache.dir
