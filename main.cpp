@@ -6,37 +6,51 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <map>
 using namespace std;
+struct PhoneDigitToLetters {
+    const map<char, string> digitToLetters = {
+            {'2', "abc"}, {'3', "def"}, {'4', "ghi"},
+            {'5', "jkl"}, {'6', "mno"}, {'7', "pqrs"},
+            {'8', "tuv"}, {'9', "wxyz"}
+    };
 
-/*vector<int> firstFunc(const vector<int> &mas1, int &counter) {
+    string operator()(char digit) {
+        return digitToLetters.at(digit);
+    }
+};
+//task 2
+/*void firstFunc(const vector<int> &mas1, int &counter) {
     vector<int> sorted = mas1;
     sort(sorted.begin(), sorted.end());
-    if(counter>0)
+    for_each(sorted.begin(), sorted.end(),
+             [](int &x) { cout << x << " "; });
+    if (counter > 0)
         counter--;
-    return sorted;
 }
+
 void secondFunc(const vector<int> &mas1, int &counter, int cooldown) {
-    if(counter == 0) {
-        vector<int> res = mas1;
+    if (counter == 0) {
         int sum = 0;
-        for (auto it = res.begin(); it != res.end(); it++) {
+        for (auto it = mas1.begin(); it != mas1.end(); it++) {
             sum += *it;
         }
-        cout<<endl;
-        cout << sum;
+        cout << "Sum: " << sum;
         counter += cooldown;
+    } else {
+        cout << "There is cooldown";
     }
-    else
-        cout<<"There is cooldown";
 }
-vector<int> thirdFunc(const vector<int> &mas1, int &counter){
+
+void thirdFunc(const vector<int> &mas1, int &counter) {
     vector<int> res = mas1;
-    for(auto it = res.begin(); it != res.end(); it++){
+    for (auto it = res.begin(); it != res.end(); it++) {
         *it *= *it;
     }
-    if(counter>0)
+    for_each(res.begin(), res.end(),
+             [](int &x) { cout << x << " "; });
+    if (counter > 0)
         counter--;
-    return res;
 }*/
 
 
@@ -59,6 +73,68 @@ void Print(const vector<Player> &player){
 
 
 int main() {
+    string phoneNumber = "23";
+
+    PhoneDigitToLetters phoneDigitToLetters;
+
+    string result = "";
+    for (char digit : phoneNumber) {
+        string letters = phoneDigitToLetters(digit);
+        if (result.empty()) {
+            result = letters;
+        } else {
+            string temp;
+            for (char a : result) {
+                for (char b : letters) {
+                    temp.push_back(a);
+                    temp.push_back(b);
+                }
+            }
+            result = temp;
+        }
+    }
+
+    cout << "Letter combinations for a phone number " << phoneNumber << ": " << result << endl;
+   /* //task 4
+    string sentence1 = "hello world hello";
+    string sentence2 = "world hello world";
+
+    map<string, int> word_counts;
+
+    auto countWords = [&word_counts](const string& sentence) {
+        string word;
+        for (char c : sentence) {
+            if (c == ' ') {
+                if (!word.empty()) {
+                    word_counts[word]++;
+                    word.clear();
+                }
+            } else {
+                word += c;
+            }
+        }
+        if (!word.empty()) {
+            word_counts[word]++;
+        }
+    };
+
+    countWords(sentence1);
+    countWords(sentence2);
+
+    bool similar = true;
+    for (const auto& pair : word_counts) {
+        if (pair.second % 2 != 0) {
+            similar = false;
+            break;
+        }
+    }
+
+    if (similar) {
+        cout << "Sentences have the same word frequency." << endl;
+    } else {
+        cout << "Sentences have different word frequencies." << endl;
+    }*/
+
 /* //task 1
     string str1 = "abracadabra";
     string str2 = "dab";
@@ -80,21 +156,32 @@ int main() {
 */
 /*//task 2
 
-        vector<int> mas1{1,3,2,4,5,9,6};
-        int cooldown;
-        cout<<"Please write your cooldown";
-        cin>>cooldown;
-        int counter=0;
-        vector<int> result = firstFunc(mas1, counter);
-        for_each(result.begin(),result.end(),
-                 [](int &x){cout<<x<<" ";});
-        secondFunc(mas1,counter,cooldown);
-        cout<<endl;
-        vector<int> res = thirdFunc(mas1, counter);
-        for_each(res.begin(),res.end(),
-                 [](int &x){cout<<x<<" ";});
-        cout<<endl;
-        secondFunc(mas1,counter,cooldown);
+        vector<int> mas1{1, 3, 2, 4, 5, 9, 6};
+    int cooldown;
+    cout << "Please write your cooldown: ";
+    cin >> cooldown;
+    int counter = 0;
+    firstFunc(mas1,counter);
+    cout<<endl;
+    cout<<"counter"<<counter;
+    cout<<endl;
+    secondFunc(mas1, counter, cooldown);
+    cout << endl;
+    cout<<"counter"<<counter;
+    cout<<endl;
+    firstFunc(mas1,counter);
+    cout << endl;
+    cout<<"counter"<<counter;
+    cout<<endl;
+    thirdFunc(mas1,counter);
+    cout<<endl;
+    cout<<"counter"<<counter;
+    cout<<endl;
+    secondFunc(mas1, counter, cooldown);
+    cout<<endl;
+    cout<<"counter"<<counter;
+    cout<<endl;
+    secondFunc(mas1, counter, cooldown);
 */
 
 /*//task 3
